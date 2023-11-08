@@ -2,7 +2,7 @@ from extract import extract
 import pandas as pd
 
 #Extract
-df_weather, df_traffic = extract()
+df_traffic, df_weather = extract()
 
 #Transform DF Weather
 
@@ -24,6 +24,11 @@ df_weather["rain"] = df_weather["rain"].astype(float)
 df_weather["showers"] = df_weather["showers"].astype(float)
 df_weather["relative_humidity_2m"] = df_weather["relative_humidity_2m"].astype(float)
 df_weather["rain"] = df_weather["rain"].astype(float)
+
+# Add 7 hours into datetime column so that it become GMT+7
+hours_to_add = pd.to_timedelta('7 hours')
+df_weather['time'] = df_weather['time'] + hours_to_add
+
 
 
 print(df_weather)
