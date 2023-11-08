@@ -22,8 +22,12 @@ def transform_weather(df_weather):
     df_weather["relative_humidity_2m"] = df_weather["relative_humidity_2m"].astype(float)
     df_weather["rain"] = df_weather["rain"].astype(float)
 
-    # Add 7 hours into datetime column so that it become GMT+7
+    # Add 7 hours into datetime column so that it become GMT+7, then set into desired format
     hours_to_add = pd.to_timedelta('7 hours')
     df_weather['time'] = df_weather['time'] + hours_to_add
+    df_weather['time'] = df_weather['time'].dt.strftime('%Y-%m-%d %H:%M')
+
+    # Rename Column
+    df_weather.rename(columns={'time': 'weather_timestamp'},inplace=True)
 
     return df_weather
