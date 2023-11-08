@@ -6,7 +6,7 @@ def transform_weather(df_weather):
     #Get needed value only
     df_weather = df_weather[["current"]]
 
-    #Transform and Reset Index
+    #Transpose and Reset Index
     df_weather = df_weather.transpose().reset_index()
 
     #Select Only needed column
